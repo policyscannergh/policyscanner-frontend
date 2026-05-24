@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PolicyScanner — Frontend
 
-## Getting Started
+The web app for [policyscanner.co.uk](https://policyscanner.co.uk) — upload any UK home insurance document and instantly see what you&rsquo;re actually covered for.
 
-First, run the development server:
+Built to compare on **cover**, not just price.
+
+## Stack
+
+- **Next.js 16** (App Router, Turbopack)
+- **React 19**
+- **Tailwind CSS v4**
+- **TypeScript**
+- Deployed on **Vercel**
+
+Pairs with the [PolicyScanner backend](https://github.com/policyscannergh/policyscanner-backend) (Flask + OpenAI + OCR) which does the actual parsing.
+
+## What&rsquo;s in here
+
+- `src/app/page.tsx` — landing page (hero, sample-result preview, insurer trust strip, upload, how-it-works, features, FAQ, footer)
+- `src/components/UploadForm.tsx` — drag-and-drop upload, POSTs to the backend, renders results
+- `src/components/ResultsView.tsx` — structured cards for parsed policy data (cover, excesses, optional extras, endorsements, exclusions)
+- `src/components/SampleResult.tsx` — stylised hero preview of a parsed result
+- `src/components/Logo.tsx` — inline SVG brand mark
+- `src/lib/types.ts` + `src/lib/format.ts` — Parsed-policy types and GBP / yes-no formatters
+
+## Run locally
 
 ```bash
+npm install
+cp .env.example .env.local   # set NEXT_PUBLIC_API_URL=http://localhost:5000
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy (Vercel)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push to GitHub.
+2. Vercel → Import Project → pick this repo.
+3. Add env var `NEXT_PUBLIC_API_URL` pointing at the Railway-hosted backend.
+4. Vercel handles the rest.
 
-## Learn More
+## Why
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Comparison sites optimise for price. Cover gets quietly trimmed — lower sums insured, missing accidental damage, higher excesses, sneaky exclusions. PolicyScanner pulls the cover out of your documents in plain English so you can compare like-for-like.
