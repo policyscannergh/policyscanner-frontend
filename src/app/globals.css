@@ -5,13 +5,13 @@
 @variant dark (.dark &);
 
 :root {
-  --background: #f4f1ea;
+  --background: #ece5d2;
   --foreground: #1a1816;
-  --muted: #6b5f52;
-  --card: #ffffff;
-  --border: #e5dcc9;
+  --muted: #5f5446;
+  --card: #f4efe1;
+  --border: #d9cdb3;
   --accent: #1a1816;
-  --accent-foreground: #f4f1ea;
+  --accent-foreground: #f4efe1;
   --brand: #e11d48;
 }
 
