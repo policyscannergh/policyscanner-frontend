@@ -45,10 +45,12 @@ export default function Home() {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               Beta · UK home insurance
             </div>
-            <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              Compare on{" "}
-              <CyclingWord />
-              <br className="hidden sm:block" /> not just price.
+            <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+              <span className="block">Compare on</span>
+              <span className="block">
+                <CyclingWord />
+              </span>
+              <span className="block">not just price.</span>
             </h1>
             <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-muted">
               Upload any UK home insurance document — policy, quote or renewal
