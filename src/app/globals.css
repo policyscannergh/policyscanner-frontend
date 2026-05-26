@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
+/* Force light-only brand palette — dark: variants are inert.
+   Phones in dark mode still see the cream + coral scheme. */
+@variant dark (.dark &);
+
 :root {
-  --background: #fafaf9;
-  --foreground: #0a0a0a;
-  --muted: #6b7280;
+  --background: #f4f1ea;
+  --foreground: #1a1816;
+  --muted: #6b5f52;
   --card: #ffffff;
-  --border: #e5e7eb;
-  --accent: #0f172a;
-  --accent-foreground: #f8fafc;
-  --brand: #1e40af;
+  --border: #e5dcc9;
+  --accent: #1a1816;
+  --accent-foreground: #f4f1ea;
+  --brand: #e11d48;
 }
 
 @theme inline {
@@ -24,17 +28,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #fafafa;
-    --muted: #9ca3af;
-    --card: #111111;
-    --border: #1f2937;
-    --accent: #f8fafc;
-    --accent-foreground: #0f172a;
-    --brand: #60a5fa;
-  }
+html {
+  color-scheme: light;
 }
 
 body {

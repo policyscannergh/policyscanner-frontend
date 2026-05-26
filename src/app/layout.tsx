@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   title: "PolicyScanner — Cover match, not just the cheapest",
   description:
     "Upload your UK home insurance document and instantly see structured cover details. Compare on cover, not just price.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f4f1ea",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
