@@ -1,6 +1,7 @@
 import { UploadForm } from "@/components/UploadForm";
 import { Logo } from "@/components/Logo";
 import { SampleResult } from "@/components/SampleResult";
+import { CyclingWord } from "@/components/CyclingWord";
 
 export default function Home() {
   return (
@@ -46,7 +47,7 @@ export default function Home() {
             </div>
             <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
               Compare on{" "}
-              <span className="text-brand">cover,</span>
+              <CyclingWord />
               <br className="hidden sm:block" /> not just price.
             </h1>
             <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-muted">

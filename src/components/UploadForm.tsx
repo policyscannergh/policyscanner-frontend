@@ -6,6 +6,7 @@ import { ResultsView } from "./ResultsView";
 import { Recommendations } from "./Recommendations";
 import { QuoteComparison } from "./QuoteComparison";
 import { ComparisonView } from "./ComparisonView";
+import { RebuildCostCheck } from "./RebuildCostCheck";
 import {
   SAMPLE_POLICY_TEXT,
   SAMPLE_ALT_POLICY_TEXT,
@@ -138,6 +139,7 @@ export function UploadForm() {
             </button>
           </div>
           <ResultsView data={a.result} />
+          <RebuildCostCheck data={a.result} />
           <QuoteComparison data={a.result} />
           <Recommendations data={a.result} />
         </div>
