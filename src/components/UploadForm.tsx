@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Parsed, UploadResponse } from "@/lib/types";
 import { ResultsView } from "./ResultsView";
 import { Recommendations } from "./Recommendations";
+import { QuoteComparison } from "./QuoteComparison";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -117,6 +118,7 @@ export function UploadForm() {
             Results
           </h2>
           <ResultsView data={result} />
+          <QuoteComparison data={result} />
           <Recommendations data={result} />
         </div>
       ) : null}
