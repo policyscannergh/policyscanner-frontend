@@ -98,16 +98,16 @@ export default function Home() {
           <p className="mb-5 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
             Reads policies from
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm">
-            <InsurerMark name="Aviva" color="#FFD400" textColor="#0F2641" />
-            <InsurerMark name="Direct Line" color="#E60000" />
-            <InsurerMark name="Admiral" color="#003F87" />
-            <InsurerMark name="Hastings" color="#FFC72C" textColor="#003A6B" />
-            <InsurerMark name="LV=" color="#005B41" />
-            <InsurerMark name="NFU Mutual" color="#00853E" />
-            <InsurerMark name="Churchill" color="#009FE3" />
-            <InsurerMark name="Halifax" color="#005EB8" />
-            <span className="text-xs font-medium text-foreground/55">
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm font-semibold tracking-tight text-foreground/70">
+            <span className="transition hover:text-foreground">Aviva</span>
+            <span className="transition hover:text-foreground">Direct Line</span>
+            <span className="transition hover:text-foreground">Admiral</span>
+            <span className="transition hover:text-foreground">Hastings</span>
+            <span className="transition hover:text-foreground">LV=</span>
+            <span className="transition hover:text-foreground">NFU Mutual</span>
+            <span className="transition hover:text-foreground">Churchill</span>
+            <span className="transition hover:text-foreground">Halifax</span>
+            <span className="text-xs font-medium text-foreground/45">
               + any UK insurer
             </span>
           </div>
@@ -369,31 +369,3 @@ function Check() {
   );
 }
 
-function InsurerMark({
-  name,
-  color,
-  textColor,
-}: {
-  name: string;
-  color: string;
-  textColor?: string;
-}) {
-  return (
-    <span
-      className="inline-flex items-center gap-2 transition-transform hover:scale-105"
-      title={name}
-    >
-      <span
-        aria-hidden
-        className="h-2.5 w-2.5 rounded-full"
-        style={{ background: color }}
-      />
-      <span
-        className="text-sm font-semibold tracking-tight"
-        style={{ color: textColor ?? color }}
-      >
-        {name}
-      </span>
-    </span>
-  );
-}
