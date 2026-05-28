@@ -98,16 +98,18 @@ export default function Home() {
           <p className="mb-5 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
             Reads policies from
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm font-medium text-muted">
-            <span>Aviva</span>
-            <span>Direct Line</span>
-            <span>Admiral</span>
-            <span>Hastings</span>
-            <span>LV=</span>
-            <span>NFU Mutual</span>
-            <span>Churchill</span>
-            <span>Halifax</span>
-            <span className="text-foreground/60">+ any UK insurer</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm">
+            <InsurerMark name="Aviva" color="#FFD400" textColor="#0F2641" />
+            <InsurerMark name="Direct Line" color="#E60000" />
+            <InsurerMark name="Admiral" color="#003F87" />
+            <InsurerMark name="Hastings" color="#FFC72C" textColor="#003A6B" />
+            <InsurerMark name="LV=" color="#005B41" />
+            <InsurerMark name="NFU Mutual" color="#00853E" />
+            <InsurerMark name="Churchill" color="#009FE3" />
+            <InsurerMark name="Halifax" color="#005EB8" />
+            <span className="text-xs font-medium text-foreground/55">
+              + any UK insurer
+            </span>
           </div>
         </div>
       </section>
@@ -263,7 +265,14 @@ export default function Home() {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">
               Legal
             </h4>
-            <p className="mt-3 text-xs leading-relaxed text-muted">
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <a href="/privacy" className="text-foreground/80 hover:underline">
+                  Privacy
+                </a>
+              </li>
+            </ul>
+            <p className="mt-4 text-xs leading-relaxed text-muted">
               PolicyScanner is a parsing tool, not regulated financial advice.
             </p>
             <p className="mt-3 text-xs text-muted">
@@ -357,5 +366,34 @@ function Check() {
         strokeLinejoin="round"
       />
     </svg>
+  );
+}
+
+function InsurerMark({
+  name,
+  color,
+  textColor,
+}: {
+  name: string;
+  color: string;
+  textColor?: string;
+}) {
+  return (
+    <span
+      className="inline-flex items-center gap-2 transition-transform hover:scale-105"
+      title={name}
+    >
+      <span
+        aria-hidden
+        className="h-2.5 w-2.5 rounded-full"
+        style={{ background: color }}
+      />
+      <span
+        className="text-sm font-semibold tracking-tight"
+        style={{ color: textColor ?? color }}
+      >
+        {name}
+      </span>
+    </span>
   );
 }
