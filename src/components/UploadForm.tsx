@@ -7,6 +7,8 @@ import { Recommendations } from "./Recommendations";
 import { QuoteComparison } from "./QuoteComparison";
 import { ComparisonView } from "./ComparisonView";
 import { RebuildCostCheck } from "./RebuildCostCheck";
+import { QualityScore } from "./QualityScore";
+import { RenewalCountdown } from "./RenewalCountdown";
 import {
   SAMPLE_POLICY_TEXT,
   SAMPLE_ALT_POLICY_TEXT,
@@ -138,6 +140,8 @@ export function UploadForm() {
               Compare with another policy →
             </button>
           </div>
+          <QualityScore data={a.result} />
+          <RenewalCountdown data={a.result} />
           <ResultsView data={a.result} />
           <RebuildCostCheck data={a.result} />
           <QuoteComparison data={a.result} />
