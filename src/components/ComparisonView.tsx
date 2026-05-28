@@ -1,5 +1,134 @@
 import type { Parsed } from "@/lib/types";
 import { gbp, text, yesNo } from "@/lib/format";
+import { computeQualityScore, type ScoreBand } from "@/lib/qualityScore";
+
+const BAND_STROKES: Record<ScoreBand, string> = {
+  excellent: "#10b981",
+  good: "#e11d48",
+  fair: "#f59e0b",
+  poor: "#dc2626",
+};
+
+const BAND_TEXT: Record<ScoreBand, string> = {
+  excellent: "text-emerald-700",
+  good: "text-brand",
+  fair: "text-amber-700",
+  poor: "text-red-700",
+};
+
+function ScoreGauge({
+  score,
+  band,
+}: {
+  score: number;
+  band: ScoreBand;
+}) {
+  const size = 92;
+  const radius = size / 2 - 7;
+  const circumference = 2 * Math.PI * radius;
+  const progress = (score / 100) * circumference;
+  return (
+    <div
+      className="relative flex shrink-0 items-center justify-center"
+      style={{ width: size, height: size }}
+    >
+      <svg
+        className="absolute inset-0 -rotate-90"
+        viewBox={`0 0 ${size} ${size}`}
+        aria-hidden
+      >
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          strokeWidth="7"
+          fill="none"
+          stroke="currentColor"
+          className="text-border"
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          strokeWidth="7"
+          fill="none"
+          stroke={BAND_STROKES[band]}
+          strokeDasharray={circumference}
+          strokeDashoffset={circumference - progress}
+          strokeLinecap="round"
+        />
+      </svg>
+      <span className="text-2xl font-semibold tabular-nums">{score}</span>
+    </div>
+  );
+}
+
+function ScoresPanel({ a, b }: { a: Parsed; b: Parsed }) {
+  const scoreA = computeQualityScore(a);
+  const scoreB = computeQualityScore(b);
+  const delta = scoreB.score - scoreA.score;
+  const deltaPositive = delta > 0;
+  const deltaZero = delta === 0;
+
+  const labelA =
+    a.policy?.insurer || a.policy?.brand || "Policy A";
+  const labelB =
+    b.policy?.insurer || b.policy?.brand || "Policy B";
+
+  return (
+    <section className="mb-5 rounded-2xl border border-border bg-card p-5 sm:p-6">
+      <div className="mb-4 text-[10px] font-medium uppercase tracking-wider text-muted">
+        Cover quality
+      </div>
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <ScoreGauge score={scoreA.score} band={scoreA.band} />
+          <div className="min-w-0">
+            <div className="truncate text-xs font-semibold text-muted">
+              {labelA}
+            </div>
+            <div
+              className={`mt-0.5 text-sm font-semibold tracking-tight ${BAND_TEXT[scoreA.band]}`}
+            >
+              {scoreA.bandLabel}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <div
+            className={`text-lg font-semibold tabular-nums ${
+              deltaZero
+                ? "text-muted"
+                : deltaPositive
+                  ? "text-emerald-700"
+                  : "text-amber-700"
+            }`}
+          >
+            {deltaZero ? "=" : deltaPositive ? `+${delta}` : delta}
+          </div>
+          <div className="text-[10px] uppercase tracking-wider text-muted">
+            {deltaZero ? "same" : deltaPositive ? "B better" : "A better"}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-end gap-3 sm:gap-4">
+          <div className="min-w-0 text-right">
+            <div className="truncate text-xs font-semibold text-muted">
+              {labelB}
+            </div>
+            <div
+              className={`mt-0.5 text-sm font-semibold tracking-tight ${BAND_TEXT[scoreB.band]}`}
+            >
+              {scoreB.bandLabel}
+            </div>
+          </div>
+          <ScoreGauge score={scoreB.score} band={scoreB.band} />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 type DiffDirection = "better" | "worse" | "neutral" | "same";
 
@@ -153,6 +282,8 @@ export function ComparisonView({
           Reset comparison
         </button>
       </div>
+
+      <ScoresPanel a={a} b={b} />
 
       <div className="mb-5 grid grid-cols-[1.1fr_1fr_1fr] items-center gap-2 rounded-2xl border border-border bg-card px-3 py-3 text-xs sm:gap-3 sm:px-4 sm:text-sm">
         <span className="font-medium text-muted">Source</span>
