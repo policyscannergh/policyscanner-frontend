@@ -225,6 +225,11 @@ function fmtNum(value: number | null | undefined): string {
   return value.toLocaleString();
 }
 
+function fmtYear(value: number | null | undefined): string {
+  if (value == null) return "—";
+  return String(value);
+}
+
 export function ComparisonView({
   a,
   b,
@@ -364,8 +369,8 @@ export function ComparisonView({
           />
           <CompareRow
             label="Year built"
-            a={fmtNum(propertyA.year_built)}
-            b={fmtNum(propertyB.year_built)}
+            a={fmtYear(propertyA.year_built)}
+            b={fmtYear(propertyB.year_built)}
             diff="same"
           />
         </CompareCard>
