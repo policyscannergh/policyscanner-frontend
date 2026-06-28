@@ -1,6 +1,7 @@
 import type { Parsed } from "@/lib/types";
 import { gbp, text, yesNo } from "@/lib/format";
 import { computeQualityScore, type ScoreBand } from "@/lib/qualityScore";
+import { CoverGapAnalysis } from "./CoverGapAnalysis";
 
 const BAND_STROKES: Record<ScoreBand, string> = {
   excellent: "#10b981",
@@ -289,6 +290,8 @@ export function ComparisonView({
       </div>
 
       <ScoresPanel a={a} b={b} />
+
+      <CoverGapAnalysis a={a} b={b} />
 
       <div className="mb-5 grid grid-cols-[1.1fr_1fr_1fr] items-center gap-2 rounded-2xl border border-border bg-card px-3 py-3 text-xs sm:gap-3 sm:px-4 sm:text-sm">
         <span className="font-medium text-muted">Source</span>
