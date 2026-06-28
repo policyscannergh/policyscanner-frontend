@@ -9,6 +9,7 @@ import { ComparisonView } from "./ComparisonView";
 import { RebuildCostCheck } from "./RebuildCostCheck";
 import { QualityScore } from "./QualityScore";
 import { RenewalCountdown } from "./RenewalCountdown";
+import { PolicyAnalysis } from "./PolicyAnalysis";
 import {
   SAMPLE_POLICY_TEXT,
   SAMPLE_ALT_POLICY_TEXT,
@@ -141,6 +142,7 @@ export function UploadForm() {
             </button>
           </div>
           <QualityScore data={a.result} />
+          <PolicyAnalysis data={a.result} />
           <RenewalCountdown data={a.result} />
           <ResultsView data={a.result} />
           <RebuildCostCheck data={a.result} />
